@@ -1,6 +1,6 @@
 <?php
 
-require_once 'libs/simple_html_dom.php';
+require_once 'libs/simple_html_dom/simple_html_dom.php';
 
 abstract class Parser {
   private $uri;
