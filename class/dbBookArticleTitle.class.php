@@ -58,4 +58,21 @@ class DbBookArticleTitle {
 
     return ($id);
   }
+
+  function getArticles(int $book_id) {
+    $query = "SELECT `id`, `title` FROM `{$this->tableName}` WHERE `book_id` = ?";
+    $zz = $this->db->getPDO()->prepare($query);
+    $zz->bindParam(1, $book_id, PDO::PARAM_INT);
+    $zz->execute();
+
+    $result = $zz->fetchAll(PDO::FETCH_ASSOC);
+    unset($zz);
+    $this->db->close();
+
+    $articles = [];
+    foreach ($result as $item) {
+      $articles[$item['id']] = $item['title'];
+    }
+    return $articles;
+  }
 }

@@ -51,4 +51,14 @@ class DbBookTitle {
 
     return ($id);
   }
+
+  function getBookTitles() {
+    $query = "SELECT `id`, `title` FROM `{$this->tableName}`";
+    $titles = [];
+    foreach ($this->db->getPDO()->query($query, PDO::FETCH_NUM) as $row) {
+      $titles[$row[0]] = $row[1];
+    }
+    $this->db->close();
+    return $titles;
+  }
 }

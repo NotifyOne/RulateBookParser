@@ -47,6 +47,25 @@ class DbBookId {
     return ($id);
   }
 
+  function getAllContentArticle(int $article_title_id) {
+    $query = "SELECT `content` FROM `{$this->tableName}` WHERE `article_title_id` = ? ORDER BY `id`";
+    $zz = $this->db->getPDO()->prepare($query);
+    $zz->bindParam(1, $article_title_id);
+    $zz->execute();
+    $result = $zz->fetchAll(PDO::FETCH_NUM);
+    unset($zz);
+    $this->db->close();
+
+    $return = array_map('current', $result);
+
+    //    $return=[];
+    //    array_walk_recursive($result, function($k) use (&$return){
+    //      $return[]=$k;
+    //    });
+
+    return $return;
+  }
+
   function addContent(int $article_title_id, string $article) {
     $query = "INSERT INTO `{$this->tableName}` (`id`, `article_title_id`, `content`) VALUES (NULL, ?, ?);";
     $zz = $this->db->getPDO()->prepare($query);
