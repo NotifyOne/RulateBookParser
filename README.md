@@ -10,3 +10,8 @@ Enter rulate book id
 Press 'parse'
 
 Press 'parse'
+
+# Read parsed book:
+Open in browser ./show.php
+
+follow the links
